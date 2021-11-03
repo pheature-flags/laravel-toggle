@@ -29,7 +29,7 @@
         "icanhazstring/composer-unused": "^0.7.5",
         "infection/infection": "^0.25",
         "pheature/dbal-toggle": "^0.1",
-        "pheature/php-sdk": "^0.1.2",
+        "pheature/php-sdk": "^0.1.2 || ^0.2.0",
         "pheature/toggle-crud": "^0.1.2",
         "pheature/toggle-crud-psr7-api": "^0.1.2",
         "phpro/grumphp": "^1.0",
