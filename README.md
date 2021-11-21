@@ -10,11 +10,15 @@
 
 ## Installation
 
-Describe package installation
+Install it using [composer package manager](https://getcomposer.org/download/).
 
 ```php
 composer require pheature/laravel-toggle
 ```
+
+## Getting started
+
+See the Getting started guide at main [docs site](https://pheatureflags.io/#/getting-started/laravel-package).
 
 ## Contributing
 
