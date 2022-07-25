@@ -78,7 +78,12 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "icanhazstring/composer-unused": true,
+            "phpro/grumphp": true
+        }
     },
     "suggest": {
         "pheature/dbal-toggle": "Doctrine DBAL pheature toggle implementation.",
