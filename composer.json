@@ -26,7 +26,7 @@
         "pheature/toggle-crud-psr11-factories": "^0.5"
     },
     "require-dev": {
-        "icanhazstring/composer-unused": "^0.7.5",
+        "icanhazstring/composer-unused": "^0.7.5 || ^0.8.0",
         "infection/infection": "^0.25",
         "pheature/dbal-toggle": "^0.5",
         "pheature/php-sdk": "^0.5",
