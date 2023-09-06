@@ -17,8 +17,8 @@
     ],
     "require": {
         "php": "^7.4|^8.0|^8.1|^8.2",
-        "illuminate/support": "^8.37",
-        "laravel/framework": "^8.40",
+        "illuminate/support": "^8.37|^9.0|^10.0",
+        "laravel/framework": "^8.40|^9.0|^10.0",
         "nyholm/psr7": "^1.4",
         "pheature/inmemory-toggle": "^0.7",
         "pheature/toggle-crud-psr11-factories": "^0.7",
