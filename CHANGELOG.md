@@ -1,6 +1,14 @@
 # Changelog
 
-## [0.7.1](https://github.com/pheature-flags/laravel-toggle/tree/0.7.1)
+## [Unreleased](https://github.com/pheature-flags/laravel-toggle/tree/0.7.2)
+
+[Full Changelog](https://github.com/pheature-flags/laravel-toggle/compare/0.7.1...0.7.2)
+
+**Merged pull requests:**
+
+- Update composer.json [\#30](https://github.com/pheature-flags/laravel-toggle/pull/30) (@p0lemic)
+
+## [0.7.1](https://github.com/pheature-flags/laravel-toggle/tree/0.7.1) (2022-12-12)
 
 [Full Changelog](https://github.com/pheature-flags/laravel-toggle/compare/0.7.0...0.7.1)
 
