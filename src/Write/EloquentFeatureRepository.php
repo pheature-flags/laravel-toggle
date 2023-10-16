@@ -26,43 +26,24 @@ final class EloquentFeatureRepository implements FeatureRepository
         $now = new DateTimeImmutable();
 
         if (null === $this->findFeature($feature->id())) {
-            DB::insert(
-                <<<SQL
-                    INSERT INTO `pheature_toggles` (
-                        feature_id, name, enabled, strategies, created_at
-                    ) VALUES (
-                       :feature_id, :name, :enabled, :strategies, :created_at
-                    )
-                SQL,
-                [
+            DB::table('pheature_toggles')
+                ->insert([
                     'feature_id' => $feature->id(),
                     'name' => $feature->id(),
                     'enabled' => (int)$feature->isEnabled(),
                     'strategies' => json_encode($feature->strategies(), JSON_THROW_ON_ERROR),
                     'created_at' => $now->format('Y-m-d H:i:s'),
-                ]
-            );
+                ]);
 
             return;
         }
-
-        DB::update(
-            <<<SQL
-                UPDATE `pheature_toggles`
-                SET
-                    enabled = :enabled,
-                    strategies = :strategies,
-                    created_at = :created_at
-                WHERE
-                    feature_id = :feature_id
-            SQL,
-            [
-                'enabled' => (int)$feature->isEnabled(),
+        DB::table('pheature_toggles')
+            ->where('feature_id', $feature->id())
+            ->update([
+                'enabled' => $feature->isEnabled(),
                 'strategies' => json_encode($feature->strategies(), JSON_THROW_ON_ERROR),
                 'updated_at' => $now->format('Y-m-d H:i:s'),
-                'feature_id' => $feature->id(),
-            ]
-        );
+            ]);
     }
 
     public function get(FeatureId $featureId): Feature
@@ -99,9 +80,12 @@ final class EloquentFeatureRepository implements FeatureRepository
             SELECT * FROM $table WHERE feature_id = :feature_id
         SQL;
 
-        /** @var EloquentFeature|false $result */
+        /** @var object[]|false $result */
         $result = DB::select($sql, ['feature_id' => $id]);
 
-        return $result ?: null;
+        /** @var EloquentFeature|null $feature */
+        $feature = !empty($result[0]) ? (array)$result[0] : null;
+
+        return $feature;
     }
 }
