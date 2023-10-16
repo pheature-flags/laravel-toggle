@@ -1,6 +1,14 @@
 # Changelog
 
-## [Unreleased](https://github.com/pheature-flags/laravel-toggle/tree/0.7.2)
+## [0.7.3](https://github.com/pheature-flags/laravel-toggle/tree/0.7.3)
+
+[Full Changelog](https://github.com/pheature-flags/laravel-toggle/compare/0.7.2...0.7.3)
+
+**Merged pull requests:**
+
+- Add Eloquent Adapter [\#31](https://github.com/pheature-flags/laravel-toggle/pull/31) (@kpicaza)
+
+## [0.7.2](https://github.com/pheature-flags/laravel-toggle/tree/0.7.2)
 
 [Full Changelog](https://github.com/pheature-flags/laravel-toggle/compare/0.7.1...0.7.2)
 
