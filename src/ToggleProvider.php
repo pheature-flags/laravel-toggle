@@ -8,6 +8,9 @@ use Closure;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Pheature\Community\Laravel\Read\EloquentFeatureFactory;
+use Pheature\Community\Laravel\Read\EloquentFeatureFinder;
+use Pheature\Community\Laravel\Write\EloquentFeatureRepository;
 use Pheature\Core\Toggle\Read\ChainToggleStrategyFactory;
 use Pheature\Core\Toggle\Read\FeatureFinder;
 use Pheature\Core\Toggle\Write\FeatureRepository;
@@ -32,6 +35,7 @@ use Pheature\Model\Toggle\StrategyFactory;
 use Pheature\Model\Toggle\StrategyFactoryFactory;
 use Pheature\Sdk\CommandRunner;
 use Pheature\Sdk\CommandRunnerFactory;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -64,8 +68,21 @@ final class ToggleProvider extends ServiceProvider
             Closure::fromCallable(new ChainToggleStrategyFactoryFactory())
         );
         $this->app->bind(ResponseFactoryInterface::class, static fn() => new Psr17Factory());
-        $this->app->bind(FeatureRepository::class, Closure::fromCallable(new FeatureRepositoryFactory()));
-        $this->app->bind(FeatureFinder::class, Closure::fromCallable(new FeatureFinderFactory()));
+        if ('eloquent' === config('pheature_flags.driver')) {
+            $this->app->bind(FeatureRepository::class, function () {
+                return new EloquentFeatureRepository();
+            });
+            $this->app->bind(FeatureFinder::class, function () {
+                /** @var ChainToggleStrategyFactory $strategyFactory */
+                $strategyFactory = $this->app->get(ChainToggleStrategyFactory::class);
+                return new EloquentFeatureFinder(new EloquentFeatureFactory(
+                    $strategyFactory
+                ));
+            });
+        } else {
+            $this->app->bind(FeatureRepository::class, Closure::fromCallable(new FeatureRepositoryFactory()));
+            $this->app->bind(FeatureFinder::class, Closure::fromCallable(new FeatureFinderFactory()));
+        }
         $this->app->extend(
             ServerRequestInterface::class,
             Closure::fromCallable(new RouteParameterAsPsr7RequestAttribute($this->app))
@@ -89,6 +106,9 @@ final class ToggleProvider extends ServiceProvider
             ],
             'config'
         );
+
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         Route::group(
             $this->routeConfiguration(),
