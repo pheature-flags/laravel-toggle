@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.4](https://github.com/pheature-flags/laravel-toggle/tree/0.7.4)
+
+[Full Changelog](https://github.com/pheature-flags/laravel-toggle/compare/0.7.3...0.7.4)
+
+**Merged pull requests:**
+
+- Fix eloquent feature repository save method [\#32](https://github.com/pheature-flags/laravel-toggle/pull/32) (@kpicaza)
+
 ## [0.7.3](https://github.com/pheature-flags/laravel-toggle/tree/0.7.3)
 
 [Full Changelog](https://github.com/pheature-flags/laravel-toggle/compare/0.7.2...0.7.3)
